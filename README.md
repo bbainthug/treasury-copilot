@@ -5,6 +5,8 @@ An `AI × Earn` MVP for crypto-native revenue routing and treasury decisions.
 `Treasury Copilot` is not a payment page and not a vault picker. It is the first decision layer after onchain revenue lands in a wallet:
 
 `Revenue in -> standardize into Base USDT -> decide keep vs deploy -> execute a live yield route`
+## Demo Video
+[X](https://x.com/BBainthug/status/2044305023258243477?s=20)
 
 ## What problem it solves
 
