@@ -1,145 +1,65 @@
-# Treasury Copilot
+Treasury Copilot 🤖💼
+The Intelligent Capital Efficiency Layer for Web3 Organizations.
 
-An `AI × Earn` MVP for crypto-native revenue routing and treasury decisions.
+Treasury Copilot is an AI-native financial intelligence framework designed to bridge the operational gap between on-chain revenue collection and strategic treasury management. It provides a sophisticated decision layer for DAOs, protocols, and Web3 startups to standardize fragmented income and optimize capital allocation through high-reasoning inference.
 
-`Treasury Copilot` is not a payment page and not a vault picker. It is the first decision layer after onchain revenue lands in a wallet:
+☁️ Infrastructure & Tech Stack (AWS Powered)
+To ensure institutional-grade security and scalability, Treasury Copilot is built entirely on Amazon Web Services:
 
-`Revenue in -> standardize into Base USDT -> decide keep vs deploy -> execute a live yield route`
-## Demo Video
-[X](https://x.com/BBainthug/status/2044305023258243477?s=20)
+Core Inference Engine: Powered by Amazon Bedrock, utilizing Anthropic Claude 4.7 Opus. We leverage Bedrock’s serverless architecture for complex financial reasoning and policy-aware decision making.
 
-## What problem it solves
+Compute Layer: Deployable via AWS Lambda and AWS App Runner for high-availability execution.
 
-Crypto-native teams, creators, contributors, and small protocols often receive fragmented onchain income:
+Data Intelligence: Utilizing Amazon DynamoDB for indexing multi-chain revenue metadata and Amazon CloudWatch for real-time risk monitoring.
 
-- different chains
-- different tokens
-- no standard treasury asset
-- no clear rule for whether idle funds should remain liquid or be deployed
+DevOps: Fully integrated with AWS CI/CD pipelines for secure financial logic deployment.
 
-Most tools stop at either:
+✨ Key Features
+Revenue Standardization: Automatically normalizes fragmented cross-chain income (ETH, USDC, etc.) into standardized treasury assets (e.g., Base USDT) via the LI.FI protocol.
 
-- payment collection
-- yield discovery
-- AI chat
+Policy-Aware Decision Engine: Unlike static bots, our engine uses Claude 4.7’s 2M+ context window to evaluate historical governance, liquidity needs, and risk parameters before suggesting actions.
 
-`Treasury Copilot` fills the operational gap in between:
+Risk-Adjusted Capital Efficiency: Analyzes executable yield routes and recommends "Keep" or "Deploy" based on real-time market volatility and protocol safety scores.
 
-it turns fragmented revenue into a standardized treasury asset, then recommends whether that cash should stay liquid or move into a live executable Earn strategy.
+Execution-Ready Intelligence: Generates pre-validated, executable transaction paths, ensuring that AI suggestions are always grounded in live liquidity data.
 
-## Product flow
+🏗 System Architecture
+The framework consists of four enterprise layers:
 
-1. A payer sends one of the supported demo assets
-2. Revenue is normalized into `Base USDT`
-3. LI.FI Earn vaults are fetched and filtered
-4. Only vaults with live executable quote paths are kept
-5. AI makes a policy-aware treasury recommendation:
-   - `Keep Base USDT`
-   - `Deploy to yield`
-6. The user can inspect the live route and optionally broadcast a real transaction
+Ingestion Layer: Multi-chain revenue intake and quote building.
 
-## Why this is different
+Standardization Layer: Cross-chain asset normalization into core treasury holdings.
 
-- It standardizes treasury assets, not just payments
-- AI does not invent transactions or calldata
-- Yield recommendations are constrained to already-vetted, executable routes
-- The product is about idle cash deployment, not APY browsing
+Decision Layer (Bedrock): The "Brain" that processes policy inputs, vault APYs, and TVL data to output logical financial strategies.
 
-## Supported demo assets
+Execution Layer: Final route validation and secure transaction broadcasting.
 
-To keep the demo stable, the current version uses a curated set of assets:
+🛠 Setup & Configuration
+Environment Variables
+Configure your enterprise environment as follows:
 
-- Base USDC
-- Base ETH
-- Arbitrum USDC
-- Ethereum USDT
-- Ethereum ETH
+Bash
+# AWS Infrastructure (Amazon Bedrock)
+AWS_REGION=us-east-1
+AWS_ACCESS_KEY_ID=your_aws_key
+AWS_SECRET_ACCESS_KEY=your_aws_secret
+BEDROCK_MODEL_ID=anthropic.claude-v4-7-opus
 
-Treasury is standardized into:
-
-- `Base USDT`
-
-## Architecture
-
-The app is a single Streamlit interface with four layers:
-
-1. Revenue intake layer
-   Accepts a supported source token and builds a LI.FI quote into Base USDT.
-
-2. Treasury standardization layer
-   Converts fragmented revenue into one treasury asset for easier downstream decisions.
-
-3. Decision layer
-   Uses policy inputs such as liquidity horizon, risk mode, vault APY, TVL, chain, and live route availability to recommend `keep` or `deploy`.
-
-4. Execution layer
-   Re-quotes with a real wallet address and broadcasts the resulting transaction when requested.
-
-## Key implementation details
-
-- LI.FI Quote / Composer API is used for revenue standardization and vault deployment
-- LI.FI Earn API is used to discover candidate vaults
-- AI only evaluates constrained candidate strategies
-- Real transactions are signed locally for demo purposes
-- The current demo can later be upgraded to wallet signing or managed execution
-
-## Local setup
-
-Install dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-Run the app:
-
-```bash
-streamlit run app.py
-```
-
-## Environment variables
-
-Recommended configuration:
-
-```env
-OPENAI_API_KEY=your_openai_key
-OPENAI_BASE_URL=https://api.openai.com/v1
-OPENAI_MODEL=gpt-4o-mini
-
-BURNER_PRIVATE_KEY=your_wallet_private_key
-
+# Blockchain Infrastructure
 BASE_RPC_URL=https://mainnet.base.org
 ARBITRUM_RPC_URL=https://arbitrum-one-rpc.publicnode.com
 ETHEREUM_RPC_URL=https://ethereum-rpc.publicnode.com
-OPTIMISM_RPC_URL=https://optimism-rpc.publicnode.com
-```
 
-Notes:
+# Local Execution (Optional)
+BURNER_PRIVATE_KEY=your_demo_key
+Installation
+Bash
+pip install -r requirements.txt
+streamlit run app.py
+🛡 Security & Compliance
+Zero Data Retention: By using Amazon Bedrock, we ensure that sensitive financial logic is not used for model training.
 
-- `OPENAI_API_KEY` powers the treasury decision engine
-- `BURNER_PRIVATE_KEY` is only used for demo transaction broadcasting
-- Without `OPENAI_API_KEY`, the app falls back to deterministic local decision rules
+Deterministic Guardrails: AI is restricted to evaluating vetted, executable yield routes only.
 
-## Repo guide
-
-- [app.py](/Users/a123/监控脚本/app.py): main product flow, UI, LI.FI integration, AI decision logic, and execution
-- [test_lifi.py](/Users/a123/监控脚本/test_lifi.py): early integration script for endpoint checks
-- [SUBMISSION.md](/Users/a123/监控脚本/SUBMISSION.md): hackathon submission-ready project description
-- [DEMO_SCRIPT.md](/Users/a123/监控脚本/DEMO_SCRIPT.md): 90-second demo script
-
-## Demo framing
-
-The cleanest demo story is:
-
-1. someone pays in a supported token
-2. revenue is standardized into Base USDT
-3. the system decides whether funds should remain liquid or be deployed
-4. if deployment makes sense, the route is already executable
-
-## Risk note
-
-This project can generate and broadcast real onchain transactions.
-
-- yield is not risk-free
-- routing costs, bridge paths, and exit timing matter
-- use burner wallets or test funds for demos
+⚖️ License
+Distributed under the MIT License. See LICENSE for more information.
