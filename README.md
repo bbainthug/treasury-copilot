@@ -1,4 +1,4 @@
-Treasury Copilot 🤖💼
+#Treasury Copilot 🤖💼
 The Intelligent Capital Efficiency Layer for Web3 Organizations.
 
 Treasury Copilot is an AI-native financial intelligence framework designed to bridge the operational gap between on-chain revenue collection and strategic treasury management. It provides a sophisticated decision layer for DAOs, protocols, and Web3 startups to standardize fragmented income and optimize capital allocation through high-reasoning inference.
